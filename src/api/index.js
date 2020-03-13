@@ -1,4 +1,4 @@
-import request from '@/plugin/axios'
+import request from '../plugin/axios'
 
 export function fetchList(query) {
 	return request({
