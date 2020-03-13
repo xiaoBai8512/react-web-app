@@ -1,0 +1,1 @@
+{"ast":null,"code":"import request from '../plugin/axios';\nexport function fetchList(query) {\n  return request({\n    url: '/126-2',\n    method: 'get',\n    data: query ? query : {}\n  });\n}","map":null,"metadata":{},"sourceType":"module"}
