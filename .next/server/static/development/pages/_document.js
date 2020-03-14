@@ -88,43 +88,239 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 4);
+/******/ 	return __webpack_require__(__webpack_require__.s = 2);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "2+G7":
-/***/ (function(module, exports) {
-
-module.exports = require("styled-jsx/server");
-
-/***/ }),
-
-/***/ 4:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__("VDXt");
-
-
-/***/ }),
-
-/***/ "AXZJ":
+/***/ "./node_modules/next/dist/next-server/lib/constants.js":
+/*!*************************************************************!*\
+  !*** ./node_modules/next/dist/next-server/lib/constants.js ***!
+  \*************************************************************/
+/*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-exports.__esModule=true;exports.htmlEscapeJsonString=htmlEscapeJsonString;// This utility is based on https://github.com/zertosh/htmlescape
-// License: https://github.com/zertosh/htmlescape/blob/0527ca7156a524d256101bb310a9f970f63078ad/LICENSE
-const ESCAPE_LOOKUP={'&':'\\u0026','>':'\\u003e','<':'\\u003c','\u2028':'\\u2028','\u2029':'\\u2029'};const ESCAPE_REGEX=/[&><\u2028\u2029]/g;function htmlEscapeJsonString(str){return str.replace(ESCAPE_REGEX,match=>ESCAPE_LOOKUP[match]);}
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.PHASE_EXPORT = 'phase-export';
+exports.PHASE_PRODUCTION_BUILD = 'phase-production-build';
+exports.PHASE_PRODUCTION_SERVER = 'phase-production-server';
+exports.PHASE_DEVELOPMENT_SERVER = 'phase-development-server';
+exports.PAGES_MANIFEST = 'pages-manifest.json';
+exports.BUILD_MANIFEST = 'build-manifest.json';
+exports.EXPORT_MARKER = 'export-marker.json';
+exports.EXPORT_DETAIL = 'export-detail.json';
+exports.PRERENDER_MANIFEST = 'prerender-manifest.json';
+exports.ROUTES_MANIFEST = 'routes-manifest.json';
+exports.REACT_LOADABLE_MANIFEST = 'react-loadable-manifest.json';
+exports.SERVER_DIRECTORY = 'server';
+exports.SERVERLESS_DIRECTORY = 'serverless';
+exports.CONFIG_FILE = 'next.config.js';
+exports.BUILD_ID_FILE = 'BUILD_ID';
+exports.BLOCKED_PAGES = ['/_document', '/_app'];
+exports.CLIENT_PUBLIC_FILES_PATH = 'public';
+exports.CLIENT_STATIC_FILES_PATH = 'static';
+exports.CLIENT_STATIC_FILES_RUNTIME = 'runtime';
+exports.AMP_RENDER_TARGET = '__NEXT_AMP_RENDER_TARGET__';
+exports.CLIENT_STATIC_FILES_RUNTIME_PATH = `${exports.CLIENT_STATIC_FILES_PATH}/${exports.CLIENT_STATIC_FILES_RUNTIME}`; // static/runtime/main.js
+
+exports.CLIENT_STATIC_FILES_RUNTIME_MAIN = `${exports.CLIENT_STATIC_FILES_RUNTIME_PATH}/main.js`; // static/runtime/amp.js
+
+exports.CLIENT_STATIC_FILES_RUNTIME_AMP = `${exports.CLIENT_STATIC_FILES_RUNTIME_PATH}/amp.js`; // static/runtime/webpack.js
+
+exports.CLIENT_STATIC_FILES_RUNTIME_WEBPACK = `${exports.CLIENT_STATIC_FILES_RUNTIME_PATH}/webpack.js`; // static/runtime/polyfills.js
+
+exports.CLIENT_STATIC_FILES_RUNTIME_POLYFILLS = `${exports.CLIENT_STATIC_FILES_RUNTIME_PATH}/polyfills.js`; // matches static/<buildid>/pages/<page>.js
+
+exports.IS_BUNDLED_PAGE_REGEX = /^static[/\\][^/\\]+[/\\]pages.*\.js$/; // matches static/<buildid>/pages/:page*.js
+
+exports.ROUTE_NAME_REGEX = /^static[/\\][^/\\]+[/\\]pages[/\\](.*)\.js$/;
+exports.SERVERLESS_ROUTE_NAME_REGEX = /^pages[/\\](.*)\.js$/;
+exports.TEMPORARY_REDIRECT_STATUS = 307;
+exports.PERMANENT_REDIRECT_STATUS = 308;
+exports.STATIC_PROPS_ID = '__N_SSG';
+exports.SERVER_PROPS_ID = '__N_SSP';
 
 /***/ }),
 
-/***/ "PRL6":
+/***/ "./node_modules/next/dist/next-server/lib/document-context.js":
+/*!********************************************************************!*\
+  !*** ./node_modules/next/dist/next-server/lib/document-context.js ***!
+  \********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var __importStar = this && this.__importStar || function (mod) {
+  if (mod && mod.__esModule) return mod;
+  var result = {};
+  if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
+  result["default"] = mod;
+  return result;
+};
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+const React = __importStar(__webpack_require__(/*! react */ "react"));
+
+exports.DocumentContext = React.createContext(null);
+
+/***/ }),
+
+/***/ "./node_modules/next/dist/next-server/lib/utils.js":
+/*!*********************************************************!*\
+  !*** ./node_modules/next/dist/next-server/lib/utils.js ***!
+  \*********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+const url_1 = __webpack_require__(/*! url */ "url");
+/**
+ * Utils
+ */
+
+
+function execOnce(fn) {
+  let used = false;
+  let result = null;
+  return (...args) => {
+    if (!used) {
+      used = true;
+      result = fn.apply(this, args);
+    }
+
+    return result;
+  };
+}
+
+exports.execOnce = execOnce;
+
+function getLocationOrigin() {
+  const {
+    protocol,
+    hostname,
+    port
+  } = window.location;
+  return `${protocol}//${hostname}${port ? ':' + port : ''}`;
+}
+
+exports.getLocationOrigin = getLocationOrigin;
+
+function getURL() {
+  const {
+    href
+  } = window.location;
+  const origin = getLocationOrigin();
+  return href.substring(origin.length);
+}
+
+exports.getURL = getURL;
+
+function getDisplayName(Component) {
+  return typeof Component === 'string' ? Component : Component.displayName || Component.name || 'Unknown';
+}
+
+exports.getDisplayName = getDisplayName;
+
+function isResSent(res) {
+  return res.finished || res.headersSent;
+}
+
+exports.isResSent = isResSent;
+
+async function loadGetInitialProps(App, ctx) {
+  var _a;
+
+  if (true) {
+    if ((_a = App.prototype) === null || _a === void 0 ? void 0 : _a.getInitialProps) {
+      const message = `"${getDisplayName(App)}.getInitialProps()" is defined as an instance method - visit https://err.sh/zeit/next.js/get-initial-props-as-an-instance-method for more information.`;
+      throw new Error(message);
+    }
+  } // when called from _app `ctx` is nested in `ctx`
+
+
+  const res = ctx.res || ctx.ctx && ctx.ctx.res;
+
+  if (!App.getInitialProps) {
+    if (ctx.ctx && ctx.Component) {
+      // @ts-ignore pageProps default
+      return {
+        pageProps: await loadGetInitialProps(ctx.Component, ctx.ctx)
+      };
+    }
+
+    return {};
+  }
+
+  const props = await App.getInitialProps(ctx);
+
+  if (res && isResSent(res)) {
+    return props;
+  }
+
+  if (!props) {
+    const message = `"${getDisplayName(App)}.getInitialProps()" should resolve to an object. But found "${props}" instead.`;
+    throw new Error(message);
+  }
+
+  if (true) {
+    if (Object.keys(props).length === 0 && !ctx.ctx) {
+      console.warn(`${getDisplayName(App)} returned an empty object from \`getInitialProps\`. This de-optimizes and prevents automatic static optimization. https://err.sh/zeit/next.js/empty-object-getInitialProps`);
+    }
+  }
+
+  return props;
+}
+
+exports.loadGetInitialProps = loadGetInitialProps;
+exports.urlObjectKeys = ['auth', 'hash', 'host', 'hostname', 'href', 'path', 'pathname', 'port', 'protocol', 'query', 'search', 'slashes'];
+
+function formatWithValidation(url, options) {
+  if (true) {
+    if (url !== null && typeof url === 'object') {
+      Object.keys(url).forEach(key => {
+        if (exports.urlObjectKeys.indexOf(key) === -1) {
+          console.warn(`Unknown key passed via urlObject into url.format: ${key}`);
+        }
+      });
+    }
+  }
+
+  return url_1.format(url, options);
+}
+
+exports.formatWithValidation = formatWithValidation;
+exports.SP = typeof performance !== 'undefined';
+exports.ST = exports.SP && typeof performance.mark === 'function' && typeof performance.measure === 'function';
+
+/***/ }),
+
+/***/ "./node_modules/next/dist/next-server/server/utils.js":
+/*!************************************************************!*\
+  !*** ./node_modules/next/dist/next-server/server/utils.js ***!
+  \************************************************************/
+/*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const constants_1 = __webpack_require__("w7wo");
+const constants_1 = __webpack_require__(/*! ../lib/constants */ "./node_modules/next/dist/next-server/lib/constants.js");
 function isBlockedPage(pathname) {
     return constants_1.BLOCKED_PAGES.indexOf(pathname) !== -1;
 }
@@ -144,7 +340,11 @@ exports.cleanAmpPath = cleanAmpPath;
 
 /***/ }),
 
-/***/ "VDXt":
+/***/ "./node_modules/next/dist/pages/_document.js":
+/*!***************************************************!*\
+  !*** ./node_modules/next/dist/pages/_document.js ***!
+  \***************************************************/
+/*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -154,25 +354,25 @@ exports.__esModule = true;
 exports.middleware = middleware;
 exports.NextScript = exports.Main = exports.Head = exports.Html = exports.default = void 0;
 
-var _propTypes = _interopRequireDefault(__webpack_require__("rf6O"));
+var _propTypes = _interopRequireDefault(__webpack_require__(/*! prop-types */ "prop-types"));
 
-var _react = _interopRequireWildcard(__webpack_require__("cDcd"));
+var _react = _interopRequireWildcard(__webpack_require__(/*! react */ "react"));
 
-var _server = _interopRequireDefault(__webpack_require__("2+G7"));
+var _server = _interopRequireDefault(__webpack_require__(/*! styled-jsx/server */ "styled-jsx/server"));
 
-var _constants = __webpack_require__("w7wo");
+var _constants = __webpack_require__(/*! ../next-server/lib/constants */ "./node_modules/next/dist/next-server/lib/constants.js");
 
-var _documentContext = __webpack_require__("nRxi");
+var _documentContext = __webpack_require__(/*! ../next-server/lib/document-context */ "./node_modules/next/dist/next-server/lib/document-context.js");
 
-var _utils = __webpack_require__("g/15");
+var _utils = __webpack_require__(/*! ../next-server/lib/utils */ "./node_modules/next/dist/next-server/lib/utils.js");
 
 exports.DocumentContext = _utils.DocumentContext;
 exports.DocumentInitialProps = _utils.DocumentInitialProps;
 exports.DocumentProps = _utils.DocumentProps;
 
-var _utils2 = __webpack_require__("PRL6");
+var _utils2 = __webpack_require__(/*! ../next-server/server/utils */ "./node_modules/next/dist/next-server/server/utils.js");
 
-var _htmlescape = __webpack_require__("AXZJ");
+var _htmlescape = __webpack_require__(/*! ../server/htmlescape */ "./node_modules/next/dist/server/htmlescape.js");
 
 function _interopRequireDefault(obj) {
   return obj && obj.__esModule ? obj : {
@@ -298,7 +498,7 @@ class Document extends _react.Component {
         // In dev we invalidate the cache by appending a timestamp to the resource URL.
         // This is a workaround to fix https://github.com/zeit/next.js/issues/5860
         // TODO: remove this workaround when https://bugs.webkit.org/show_bug.cgi?id=187726 is fixed.
-        _devOnlyInvalidateCacheQueryString: false ? undefined : ''
+        _devOnlyInvalidateCacheQueryString: true ? '?ts=' + Date.now() : undefined
       }
     }, _react.default.createElement(Document, props));
   }
@@ -327,7 +527,7 @@ class Html extends _react.Component {
     } = this.context._documentProps;
     return _react.default.createElement("html", Object.assign({}, htmlProps, this.props, {
       amp: inAmpMode ? '' : undefined,
-      "data-ampdevmode": inAmpMode && false ? '' : undefined
+      "data-ampdevmode": inAmpMode && true ? '' : undefined
     }));
   }
 
@@ -452,7 +652,18 @@ class Head extends _react.Component {
     } = this.context._documentProps;
     let children = this.props.children; // show a warning if Head contains <title> (only in development)
 
-    if (false) {}
+    if (true) {
+      children = _react.default.Children.map(children, child => {
+        const isReactHelmet = child && child.props && child.props['data-react-helmet'];
+
+        if (child && child.type === 'title' && !isReactHelmet) {
+          console.warn("Warning: <title> should not be used in _document.js's <Head>. https://err.sh/next.js/no-document-title");
+        }
+
+        return child;
+      });
+      if (this.props.crossOrigin) console.warn('Warning: `Head` attribute `crossOrigin` is deprecated. https://err.sh/next.js/doc-crossorigin-deprecated');
+    }
 
     let hasAmphtmlRel = false;
     let hasCanonicalRel = false; // show warning and remove conflicting amp head tags
@@ -724,9 +935,7 @@ class NextScript extends _react.Component {
     } = this.context;
 
     if (inAmpMode) {
-      if (true) {
-        return null;
-      }
+      if (false) {}
 
       const devFiles = [_constants.CLIENT_STATIC_FILES_RUNTIME_AMP, _constants.CLIENT_STATIC_FILES_RUNTIME_WEBPACK];
       return _react.default.createElement(_react.default.Fragment, null, staticMarkup ? null : _react.default.createElement("script", {
@@ -752,7 +961,9 @@ class NextScript extends _react.Component {
       buildId
     } = __NEXT_DATA__;
 
-    if (false) {}
+    if (true) {
+      if (this.props.crossOrigin) console.warn('Warning: `NextScript` attribute `crossOrigin` is deprecated. https://err.sh/next.js/doc-crossorigin-deprecated');
+    }
 
     const pageScript = [_react.default.createElement("script", Object.assign({
       async: true,
@@ -810,213 +1021,75 @@ function getPageFile(page, buildId) {
 
 /***/ }),
 
-/***/ "bzos":
-/***/ (function(module, exports) {
-
-module.exports = require("url");
-
-/***/ }),
-
-/***/ "cDcd":
-/***/ (function(module, exports) {
-
-module.exports = require("react");
-
-/***/ }),
-
-/***/ "g/15":
+/***/ "./node_modules/next/dist/server/htmlescape.js":
+/*!*****************************************************!*\
+  !*** ./node_modules/next/dist/server/htmlescape.js ***!
+  \*****************************************************/
+/*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-const url_1 = __webpack_require__("bzos");
-/**
- * Utils
- */
-
-
-function execOnce(fn) {
-  let used = false;
-  let result = null;
-  return (...args) => {
-    if (!used) {
-      used = true;
-      result = fn.apply(this, args);
-    }
-
-    return result;
-  };
-}
-
-exports.execOnce = execOnce;
-
-function getLocationOrigin() {
-  const {
-    protocol,
-    hostname,
-    port
-  } = window.location;
-  return `${protocol}//${hostname}${port ? ':' + port : ''}`;
-}
-
-exports.getLocationOrigin = getLocationOrigin;
-
-function getURL() {
-  const {
-    href
-  } = window.location;
-  const origin = getLocationOrigin();
-  return href.substring(origin.length);
-}
-
-exports.getURL = getURL;
-
-function getDisplayName(Component) {
-  return typeof Component === 'string' ? Component : Component.displayName || Component.name || 'Unknown';
-}
-
-exports.getDisplayName = getDisplayName;
-
-function isResSent(res) {
-  return res.finished || res.headersSent;
-}
-
-exports.isResSent = isResSent;
-
-async function loadGetInitialProps(App, ctx) {
-  var _a;
-
-  if (false) {} // when called from _app `ctx` is nested in `ctx`
-
-
-  const res = ctx.res || ctx.ctx && ctx.ctx.res;
-
-  if (!App.getInitialProps) {
-    if (ctx.ctx && ctx.Component) {
-      // @ts-ignore pageProps default
-      return {
-        pageProps: await loadGetInitialProps(ctx.Component, ctx.ctx)
-      };
-    }
-
-    return {};
-  }
-
-  const props = await App.getInitialProps(ctx);
-
-  if (res && isResSent(res)) {
-    return props;
-  }
-
-  if (!props) {
-    const message = `"${getDisplayName(App)}.getInitialProps()" should resolve to an object. But found "${props}" instead.`;
-    throw new Error(message);
-  }
-
-  if (false) {}
-
-  return props;
-}
-
-exports.loadGetInitialProps = loadGetInitialProps;
-exports.urlObjectKeys = ['auth', 'hash', 'host', 'hostname', 'href', 'path', 'pathname', 'port', 'protocol', 'query', 'search', 'slashes'];
-
-function formatWithValidation(url, options) {
-  if (false) {}
-
-  return url_1.format(url, options);
-}
-
-exports.formatWithValidation = formatWithValidation;
-exports.SP = typeof performance !== 'undefined';
-exports.ST = exports.SP && typeof performance.mark === 'function' && typeof performance.measure === 'function';
+exports.__esModule=true;exports.htmlEscapeJsonString=htmlEscapeJsonString;// This utility is based on https://github.com/zertosh/htmlescape
+// License: https://github.com/zertosh/htmlescape/blob/0527ca7156a524d256101bb310a9f970f63078ad/LICENSE
+const ESCAPE_LOOKUP={'&':'\\u0026','>':'\\u003e','<':'\\u003c','\u2028':'\\u2028','\u2029':'\\u2029'};const ESCAPE_REGEX=/[&><\u2028\u2029]/g;function htmlEscapeJsonString(str){return str.replace(ESCAPE_REGEX,match=>ESCAPE_LOOKUP[match]);}
 
 /***/ }),
 
-/***/ "nRxi":
+/***/ 2:
+/*!***************************************!*\
+  !*** multi next/dist/pages/_document ***!
+  \***************************************/
+/*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-"use strict";
+module.exports = __webpack_require__(/*! next/dist/pages/_document */"./node_modules/next/dist/pages/_document.js");
 
-
-var __importStar = this && this.__importStar || function (mod) {
-  if (mod && mod.__esModule) return mod;
-  var result = {};
-  if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
-  result["default"] = mod;
-  return result;
-};
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-const React = __importStar(__webpack_require__("cDcd"));
-
-exports.DocumentContext = React.createContext(null);
 
 /***/ }),
 
-/***/ "rf6O":
+/***/ "prop-types":
+/*!*****************************!*\
+  !*** external "prop-types" ***!
+  \*****************************/
+/*! no static exports found */
 /***/ (function(module, exports) {
 
 module.exports = require("prop-types");
 
 /***/ }),
 
-/***/ "w7wo":
-/***/ (function(module, exports, __webpack_require__) {
+/***/ "react":
+/*!************************!*\
+  !*** external "react" ***!
+  \************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
 
-"use strict";
+module.exports = require("react");
 
+/***/ }),
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.PHASE_EXPORT = 'phase-export';
-exports.PHASE_PRODUCTION_BUILD = 'phase-production-build';
-exports.PHASE_PRODUCTION_SERVER = 'phase-production-server';
-exports.PHASE_DEVELOPMENT_SERVER = 'phase-development-server';
-exports.PAGES_MANIFEST = 'pages-manifest.json';
-exports.BUILD_MANIFEST = 'build-manifest.json';
-exports.EXPORT_MARKER = 'export-marker.json';
-exports.EXPORT_DETAIL = 'export-detail.json';
-exports.PRERENDER_MANIFEST = 'prerender-manifest.json';
-exports.ROUTES_MANIFEST = 'routes-manifest.json';
-exports.REACT_LOADABLE_MANIFEST = 'react-loadable-manifest.json';
-exports.SERVER_DIRECTORY = 'server';
-exports.SERVERLESS_DIRECTORY = 'serverless';
-exports.CONFIG_FILE = 'next.config.js';
-exports.BUILD_ID_FILE = 'BUILD_ID';
-exports.BLOCKED_PAGES = ['/_document', '/_app'];
-exports.CLIENT_PUBLIC_FILES_PATH = 'public';
-exports.CLIENT_STATIC_FILES_PATH = 'static';
-exports.CLIENT_STATIC_FILES_RUNTIME = 'runtime';
-exports.AMP_RENDER_TARGET = '__NEXT_AMP_RENDER_TARGET__';
-exports.CLIENT_STATIC_FILES_RUNTIME_PATH = `${exports.CLIENT_STATIC_FILES_PATH}/${exports.CLIENT_STATIC_FILES_RUNTIME}`; // static/runtime/main.js
+/***/ "styled-jsx/server":
+/*!************************************!*\
+  !*** external "styled-jsx/server" ***!
+  \************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
 
-exports.CLIENT_STATIC_FILES_RUNTIME_MAIN = `${exports.CLIENT_STATIC_FILES_RUNTIME_PATH}/main.js`; // static/runtime/amp.js
+module.exports = require("styled-jsx/server");
 
-exports.CLIENT_STATIC_FILES_RUNTIME_AMP = `${exports.CLIENT_STATIC_FILES_RUNTIME_PATH}/amp.js`; // static/runtime/webpack.js
+/***/ }),
 
-exports.CLIENT_STATIC_FILES_RUNTIME_WEBPACK = `${exports.CLIENT_STATIC_FILES_RUNTIME_PATH}/webpack.js`; // static/runtime/polyfills.js
+/***/ "url":
+/*!**********************!*\
+  !*** external "url" ***!
+  \**********************/
+/*! no static exports found */
+/***/ (function(module, exports) {
 
-exports.CLIENT_STATIC_FILES_RUNTIME_POLYFILLS = `${exports.CLIENT_STATIC_FILES_RUNTIME_PATH}/polyfills.js`; // matches static/<buildid>/pages/<page>.js
-
-exports.IS_BUNDLED_PAGE_REGEX = /^static[/\\][^/\\]+[/\\]pages.*\.js$/; // matches static/<buildid>/pages/:page*.js
-
-exports.ROUTE_NAME_REGEX = /^static[/\\][^/\\]+[/\\]pages[/\\](.*)\.js$/;
-exports.SERVERLESS_ROUTE_NAME_REGEX = /^pages[/\\](.*)\.js$/;
-exports.TEMPORARY_REDIRECT_STATUS = 307;
-exports.PERMANENT_REDIRECT_STATUS = 308;
-exports.STATIC_PROPS_ID = '__N_SSG';
-exports.SERVER_PROPS_ID = '__N_SSP';
+module.exports = require("url");
 
 /***/ })
 
 /******/ });
+//# sourceMappingURL=_document.js.map

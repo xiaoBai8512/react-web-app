@@ -19,7 +19,6 @@ service.interceptors.request.use(
 			// showapi_timestamp,
 			// showapi_res_gzip,
 		}
-		console.log(23, config)
 
 		let joinedCommonDataStr = ''
 

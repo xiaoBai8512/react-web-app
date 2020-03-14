@@ -1,22 +1,36 @@
-.contentlist{
-	div{
+.contentlist {
+	div {
 		background-color: #ccc;
 		margin-bottom: 20px;
 		display: flex;
 		// flex:1;
 	}
-	span{
+	span {
 		margin: 0 10px;
 	}
 }
 
-.avatarUrl{
-	width:50px;
+.avatarUrl {
+	width: 50px;
 	height: 50px;
 	overflow: hidden;
 	border-radius: 50px;
 }
-.cardUrl{
-	width:100px;
+.cardUrl {
+	width: 100px;
 	height: 150px;
+}
+
+.cardDiv {
+	width: 132px;
+	height: 200px;
+	overflow: hidden;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	img {
+		width: 100%;
+		// height: 100%;
+		overflow: hidden;
+	}
 }
