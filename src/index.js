@@ -23,6 +23,8 @@ moment.locale('zh-cn')
 const { SubMenu } = Menu
 const { Header, Content, Footer, Sider } = Layout
 
+console.log(26,Router)
+
 ReactDOM.render(
 	<ConfigProvider locale={zhCN}>
 		<Layout>
@@ -134,16 +136,11 @@ ReactDOM.render(
 				</Layout>
 			</Content>
 			<Footer style={{ textAlign: 'center' }}>
-				Ant Design ©2018 Created by Ant UED
+				Web ©2020 Created by GuLei
 			</Footer>
 		</Layout>
 	</ConfigProvider>,
 	document.getElementById('root'),
 )
 
-// ReactDOM.render(<Router />, document.getElementById('root'))
-
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
 serviceWorker.unregister()

@@ -1,7 +1,7 @@
 import React from 'react'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
-import index from '../pages/index/index'
-import news from '../pages/news/news'
+import index from '../pages/index'
+import news from '../pages/news'
 
 const BasicRoute = () => (
 	<BrowserRouter>
