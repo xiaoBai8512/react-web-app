@@ -1,17 +1,29 @@
-import React from 'react'
-import { BrowserRouter, Route, Switch } from 'react-router-dom'
-import index from '../pages/index'
-import news from '../pages/news'
+import React, { Component } from 'react'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import routers from './routers'
 
-const BasicRoute = () => (
-	<BrowserRouter>
-		<Switch>
-			<Route exact path="/" component={index} />
-		</Switch>
-		<Switch>
-			<Route exact path="/news" component={news} />
-		</Switch>
-	</BrowserRouter>
-)
+class BasicRoute extends Component {
+	constructor(props) {
+		super(props)
+		this.state = {}
+		console.log(9,this.props)
+	}
+	render() {
+		return (
+			<Router>
+				<Switch>
+					{routers.map((item, index) => (
+						<Route
+							exact
+							path={item.path}
+							component={item.component}
+							key={index}
+						/>
+					))}
+				</Switch>
+			</Router>
+		)
+	}
+}
 
 export default BasicRoute

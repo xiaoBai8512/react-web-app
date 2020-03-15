@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
 // import { connect } from 'react-redux'
 
-function mapStateToProps(state) {
-	return {}
-}
+// function (state) {
+// 	return {}
+// }
 
 class news extends Component {
 	render() {
-		return <div>456</div>
+		return <div>4563123123131</div>
 	}
 }
 
