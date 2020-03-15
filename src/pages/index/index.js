@@ -15,7 +15,7 @@ class index extends Component {
 	constructor(props) {
 		super(props)
 		this.state = {
-			content: [],
+			content: [], // 数据体
 		}
 	}
 	componentDidMount(props) {
@@ -40,10 +40,9 @@ class index extends Component {
 					},
 					pageSize: 5,
 					total:
-						this.state.content.allPages /
-						this.state.content.maxResult,
+						this.state.content.allPages,
 					showTotal: (total) =>
-						`共 ${total / this.state.content.maxResult} 页`,
+						`共 ${total } 页`,
 				}}
 				dataSource={this.state.content.contentlist}
 				footer={

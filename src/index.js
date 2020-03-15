@@ -26,32 +26,30 @@ const { Header, Content, Footer, Sider } = Layout
 ReactDOM.render(
 	<ConfigProvider locale={zhCN}>
 		<Layout>
-			<Sider
-				className="site-layout-background"
-				width={200}
-				breakpoint="lg"
-				collapsedWidth="0"
-				onBreakpoint={(broken) => {
-					console.log(broken)
-				}}
-				onCollapse={(collapsed, type) => {
-					console.log(collapsed, type)
-				}}
-			>
-				<Header className="header">
-					<div className="logo" />
-					<Menu
-						theme="dark"
-						mode="horizontal"
-						defaultSelectedKeys={['1']}
-						style={{ lineHeight: '64px' }}
-					>
-						<Menu.Item key="1">nav 1</Menu.Item>
-						<Menu.Item key="2">nav 2</Menu.Item>
-						<Menu.Item key="3">nav 3</Menu.Item>
-					</Menu>
-				</Header>
-			</Sider>
+			<Header className="header">
+				<div className="logo" />
+				<Menu
+					theme="dark"
+					mode="horizontal"
+					defaultSelectedKeys={['1']}
+					style={{ lineHeight: '64px' }}
+				>
+					<>
+						<Row>
+							<Col span={8}>
+								<Menu.Item key="1">nav 1</Menu.Item>
+							</Col>
+							<Col span={8}>
+								<Menu.Item key="2">nav 2</Menu.Item>
+							</Col>
+							<Col span={8}>
+								<Menu.Item key="3">nav 3</Menu.Item>
+							</Col>
+						</Row>
+					</>
+				</Menu>
+			</Header>
+
 			<Content style={{ padding: '0 50px' }}>
 				<Breadcrumb style={{ margin: '16px 0' }}>
 					<Breadcrumb.Item>Home</Breadcrumb.Item>
