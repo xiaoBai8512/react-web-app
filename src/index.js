@@ -5,7 +5,7 @@ import ReactDOM from 'react-dom'
 import * as serviceWorker from './serviceWorker'
 
 import { BrowserRouter } from 'react-router-dom'
-import BasicRoute from './router'
+import Router from './router'
 import { ConfigProvider, Layout, Menu, Breadcrumb, Row, Col } from 'antd'
 import {
 	UserOutlined,
@@ -115,7 +115,7 @@ ReactDOM.render(
 							<>
 								<Row>
 									<Col span={24}>
-										<BasicRoute history={history} />
+										<Router />
 									</Col>
 								</Row>
 							</>
