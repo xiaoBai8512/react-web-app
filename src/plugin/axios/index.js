@@ -42,28 +42,6 @@ service.interceptors.request.use(
 			Object.assign(config.data, commonData)
 			return config
 		} else {
-			// const formData = new FormData()
-			// console.log(42, formData)
-			// let params = Object.assign(config.data, commonData)
-			// console.log(44, params)
-			// Object.keys(params).forEach((key) => {
-			// 	formData.append(
-			// 		key,
-			// 		Object.assign(config.data, commonData)[key],
-			// 	)
-			// })
-			// if (config.url.indexOf('?') > -1) {
-			// 	config.url += joinedCommonDataStr
-			// } else {
-			// 	config.url += '?' + joinedCommonDataStr.substr(1)
-			// }
-			// let params = Object.assign(config.data, commonData)
-			// console.log(51, params)
-
-			// const formData = new FormData()
-			// Object.keys(params).forEach((key) => {
-			// 	formData.append(key, params[key])
-			// })
 			if (config.url.indexOf('?') > -1) {
 				config.par += joinedCommonDataStr
 			} else {
