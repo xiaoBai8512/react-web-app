@@ -38,21 +38,12 @@ service.interceptors.request.use(
 
 			return config
 		}
-		if (config.method === 'post' && typeof config.data === Object) {
-			Object.assign(config.data, commonData)
-			return config
-		} else {
-			if (config.url.indexOf('?') > -1) {
-				config.par += joinedCommonDataStr
-			} else {
-				config.url += '?' + joinedCommonDataStr.substr(1)
-			}
-			qs.stringify(joinedCommonDataStr)
-			console.log(52, joinedCommonDataStr)
+		if (config.method === 'post') {
+			config.data = qs.stringify(Object.assign(config.data, commonData))
 			return config
 		}
 	},
-//TODO: 217713900
+	//TODO: 217713900
 	(error) => {
 		return Promise.reject(error)
 	},
@@ -60,15 +51,12 @@ service.interceptors.request.use(
 // HTTPresponse拦截
 service.interceptors.response.use(
 	(data) => {
-		// console.log('data', data)
 		let res = data.data
 		if (res.status && res.status !== 'SUCCEED') {
 			let errMsg = res.errorMessage
 			if (errMsg) {
 			}
 		}
-		// console.log('data', data)
-
 		return data
 	},
 	(error) => {
@@ -91,4 +79,5 @@ service.interceptors.response.use(
 		return Promise.reject(error)
 	},
 )
+
 export default service
