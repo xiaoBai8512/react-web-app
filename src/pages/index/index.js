@@ -14,9 +14,16 @@ class index extends Component {
 	componentDidMount(props) {
 		this.getData()
 	}
-
-	getData() {
-		fetchList().then(({ data }) => {
+	onChange(e) {
+		// const that = this
+		// console.log(18, e)
+		this.getData(e)
+	}
+	getData(e) {
+		const params = {
+			page: e ? e : 1,
+		}
+		fetchList(params).then(({ data }) => {
 			this.setState({
 				content: data.showapi_res_body.pagebean,
 			})
@@ -24,7 +31,12 @@ class index extends Component {
 	}
 
 	render() {
-		return <NewsList content={this.state.content} />
+		return (
+			<NewsList
+				content={this.state.content}
+				changePage={this.onChange.bind(this)}
+			/>
+		)
 	}
 }
 

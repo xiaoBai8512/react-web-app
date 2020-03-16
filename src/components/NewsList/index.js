@@ -12,19 +12,28 @@ const IconText = ({ icon, text }) => (
 )
 
 class newsList extends Component {
+	// changePage(page) {
+	// 	this.props.changePage(page)
+	// 	console.log(page)
+	// }
+
 	render() {
 		let data = this.props.content
+
+		// let totals = Math.floor(data.allNum / data.maxResult).toString()
+		console.log(Math.round(data.allNum / 20))
 		return (
 			<List
 				itemLayout="vertical"
 				size="small"
 				pagination={{
+					current: data.currentPage,
 					onChange: (page) => {
-						console.log(page)
+						this.props.changePage(page)
 					},
-					pageSize: 5,
-					total: data.allPages,
-					showTotal: (total) => `共 ${total} 页`,
+					pageSize: 20,
+					total: data.allNum,
+					showTotal: (total) => `共 ${Math.round(total / 20)} 页`,
 				}}
 				dataSource={data.contentlist}
 				footer={
