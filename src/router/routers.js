@@ -1,5 +1,6 @@
-import index from '../pages/index'
-import news from '../pages/news'
+import index from '../containers/index'
+import news from '../containers/news'
+import statistic from '../containers/statistic'
 
 export default [
 	{
@@ -13,8 +14,8 @@ export default [
 		component: news,
 	},
 	{
-		name: '新闻',
-		path: '/news',
-		component: news,
+		name: '疫情统计',
+		path: '/statistic',
+		component: statistic,
 	},
 ]

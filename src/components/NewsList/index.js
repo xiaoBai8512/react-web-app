@@ -12,10 +12,6 @@ const IconText = ({ icon, text }) => (
 )
 
 class newsList extends Component {
-	// changePage(page) {
-	// 	this.props.changePage(page)
-	// 	console.log(page)
-	// }
 
 	render() {
 		let data = this.props.content

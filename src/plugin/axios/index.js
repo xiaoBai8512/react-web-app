@@ -15,7 +15,6 @@ const service = axios.create({
 // HTTPrequest拦截
 service.interceptors.request.use(
 	(config) => {
-		console.log(19, config)
 		const commonData = {
 			showapi_appid: '42222',
 			showapi_sign: '42932bad205a407a8429ba513cfbece1',

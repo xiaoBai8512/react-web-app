@@ -10,7 +10,7 @@ export function fetchList(query) {
 }
 
 // 疫情数据
-export function todayStatictic(query) {
+export function todayStatistic(query) {
 	return request({
 		url: '/2217-2',
 		method: 'post',
