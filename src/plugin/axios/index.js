@@ -8,7 +8,6 @@ const service = axios.create({
 	// withCredentials: true, // 跨域请求，允许保存cookie
 	timeout: 100000, // 请求超时时间
 	headers: {
-		// 'Enc-type': 'application/x-www-form-urlencoded',
 		'Content-Type': 'application/x-www-form-urlencoded',
 	},
 })
@@ -16,7 +15,6 @@ const service = axios.create({
 // HTTPrequest拦截
 service.interceptors.request.use(
 	(config) => {
-		// const { userId, activationCode, latestOrderSn } =
 		console.log(19, config)
 		const commonData = {
 			showapi_appid: '42222',
@@ -55,7 +53,9 @@ service.interceptors.response.use(
 		if (res.status && res.status !== 'SUCCEED') {
 			let errMsg = res.errorMessage
 			if (errMsg) {
+				return
 			}
+
 		}
 		return data
 	},
@@ -70,6 +70,7 @@ service.interceptors.response.use(
 				errMsg = error.response.data.errorMessage
 			}
 			if (errMsg) {
+				return
 			}
 		}
 

@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { todayStatictic } from '../../api'
 
+import Statictic from '../../components/Statictic'
+
 // function (state) {
 // 	return {}
 // }
@@ -22,7 +24,7 @@ class news extends Component {
 	}
 
 	render() {
-		return <div>4563123123131</div>
+		return <Statictic />
 	}
 }
 
