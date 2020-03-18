@@ -7,7 +7,7 @@ class news extends Component {
 	constructor(props) {
 		super(props)
 		this.state = {
-			todayStatisticData: [],
+			todayStatisticData: null,
 		}
 	}
 

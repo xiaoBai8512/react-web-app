@@ -1,4 +1,9 @@
 .site-statistic-demo-card {
-  background: #ececec;
-  padding: 30px;
+	background: #ececec;
+	padding: 30px;
+}
+
+.ant-statistic-content {
+	display: flex;
+	flex-direction: column;
 }

@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
-import { todayStatistic } from '../../api'
+import { yq_newsList } from '../../api'
+
+import YQNewsList from '../../components/YQNewsList'
 
 // import Statistic from '../../components/Statistic'
 
@@ -11,7 +13,7 @@ class news extends Component {
 	constructor(props) {
 		super(props)
 		this.state = {
-			todayStatisticData: [],
+			newsList: [],
 		}
 	}
 
@@ -20,15 +22,15 @@ class news extends Component {
 	}
 
 	getData() {
-		todayStatistic().then(({ data }) => {
+		yq_newsList().then(({ data }) => {
 			this.setState({
-				todayStatisticData: data.showapi_res_body.todayDetailList,
+				newsList: data.showapi_res_body,
 			})
 		})
 	}
 
 	render() {
-		return <div></div>
+		return <YQNewsList newsList={this.state.newsList} />
 	}
 }
 

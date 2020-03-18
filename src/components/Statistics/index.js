@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 
 import { Statistic, Card, Row, Col, Table } from 'antd'
 import { ArrowUpOutlined, ArrowDownOutlined } from '@ant-design/icons'
-import _ from 'lodash'
+// import _ from 'lodash'
 
 import './index.scss'
 
@@ -18,17 +18,10 @@ class Statistics extends Component {
 			data: [],
 		}
 	}
-	// componentDidMount() {
-	// 	setTimeout(() => {
-	// 		this.setState({
-	// 			data: this.props.yq_Data.todayDetailList,
-	// 		})
-	// 	}, 1000)
-	// }
 
 	componentWillReceiveProps(nextProps) {
 		this.setState({
-			data: nextProps.yq_Data.todayDetailList,
+			data: nextProps.yq_Data,
 		})
 	}
 	render() {
@@ -67,40 +60,88 @@ class Statistics extends Component {
 				width: 100,
 			},
 			{
-				title: 'Action',
+				title: '操作',
 				key: 'operation',
 				fixed: 'right',
 				width: 30,
-				render: () => <a>action</a>,
+				render: () => <a>详细数据</a>,
 			},
 		]
-		const { data } = this.state
+		const { data } = this.state ? this.state : {}
 		console.log(data)
+		console.log(this)
 		return (
 			<div>
 				<div className="site-statistic-demo-card">
+					<div
+						style={{
+							display: 'flex',
+							justifyContent: 'center',
+							flexDirection: 'column',
+						}}
+					>
+						<h2>全国疫情数据（总计/人数）：</h2>
+						<h5>
+							数据发布时间：
+							{data.updateTime ? data.updateTime : 0}
+						</h5>
+					</div>
 					<Row gutter={16}>
-						<Col span={12}>
+						<Col span={6}>
 							<Card>
 								<Statistic
-									title="Active"
-									value={11.28}
-									precision={2}
-									valueStyle={{ color: '#3f8600' }}
+									title={<h4>确诊人数</h4>}
+									value={
+										data.todayStatictic
+											? data.todayStatictic.confirmedNum
+											: 0
+									}
+									valueStyle={{
+										color: '#cf1322',
+									}}
 									prefix={<ArrowUpOutlined />}
-									suffix="%"
 								/>
 							</Card>
 						</Col>
-						<Col span={12}>
+						<Col span={6}>
 							<Card>
 								<Statistic
-									title="Idle"
-									value={9.3}
-									precision={2}
-									valueStyle={{ color: '#cf1322' }}
+									title={<h4>死亡人数</h4>}
+									value={
+										data.todayStatictic
+											? data.todayStatictic.deadNum
+											: 0
+									}
+									valueStyle={{ color: '#777777' }}
 									prefix={<ArrowDownOutlined />}
-									suffix="%"
+								/>
+							</Card>
+						</Col>
+						<Col span={6}>
+							<Card>
+								<Statistic
+									title={<h4>治愈人数</h4>}
+									value={
+										data.todayStatictic
+											? data.todayStatictic.curedNum
+											: 0
+									}
+									valueStyle={{ color: '#3f8600' }}
+									prefix={<ArrowUpOutlined />}
+								/>
+							</Card>
+						</Col>
+						<Col span={6}>
+							<Card>
+								<Statistic
+									title={<h4>重症病例</h4>}
+									value={
+										data.todayStatictic
+											? data.todayStatictic.seriousNum
+											: 0
+									}
+									valueStyle={{ color: '#FF9933' }}
+									prefix={<ArrowDownOutlined />}
 								/>
 							</Card>
 						</Col>
@@ -109,11 +150,10 @@ class Statistics extends Component {
 				<Table
 					columns={columns}
 					// dataSource={this.props.yq_Data.todayDetailList}
-					dataSource={this.state.data}
+					dataSource={data.todayDetailList}
 					scroll={{ x: 1500, y: 1000 }}
 					rowKey={(record, index) => `complete${record.id}${index}`}
 				/>
-				,
 			</div>
 		)
 	}

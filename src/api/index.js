@@ -17,3 +17,12 @@ export function todayStatistic(query) {
 		data: query ? query : {},
 	})
 }
+
+// 疫情新闻
+export function yq_newsList(query) {
+	return request({
+		url: '/2217-4',
+		method: 'post',
+		data: query ? query : {},
+	})
+}
